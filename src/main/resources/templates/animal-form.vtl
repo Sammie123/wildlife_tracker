@@ -3,8 +3,8 @@
 <h1>Add Animal to Database</h1>
 
 <form action="/animal/new" method="post">
-  <label>Animal Species</label>
-  <input type="text" name="name">
+  <label for="species">Animal Species</label>
+  <input id="species" type="text" name="name">
   <label>Endangered?</label>
   <input type="checkbox" name="endangered">
 
@@ -25,5 +25,5 @@
   </select>
 
   <button type="submit">Add Animal</button>
-  
+
 </form>

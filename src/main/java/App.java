@@ -67,14 +67,14 @@ public class App {
         String age = request.queryParams("age");
         EndangeredAnimal endangeredAnimal = new EndangeredAnimal(name, health, age);
         endangeredAnimal.save();
-        model.put("animals", Animal.all());
-        model.put("endangeredAnimals", EndangeredAnimal.all());
+        // model.put("animals", Animal.all());
+        model.put("endangered", EndangeredAnimal.all());
       } else {
         String name = request.queryParams("name");
         Animal animal = new Animal(name);
         animal.save();
         model.put("animals", Animal.all());
-        model.put("endangeredAnimals", EndangeredAnimal.all());
+        // model.put("endangeredAnimals", EndangeredAnimal.all());
       }
       response.redirect("/");
         return null;
