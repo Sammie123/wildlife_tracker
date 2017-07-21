@@ -31,27 +31,18 @@
           <option>Young</option>
           <option>Adult</option>
         </select>
-        
+
         <button type="submit" class="btn btn-danger">Update Information</button>
+
+        <form action="/endangered_animal/$endangeredAnimal.getId()/delete" method="post">
+          <button type="submit" class="btn btn-danger" id="delete">Delete Sighting</button>
+        </form>
+
       </ul>
     #end
   #end
 </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <form action="/endangered_animal/$endangeredAnimal.getId()/delete" method="post">
-  <button type="submit" class="btn btn-danger" id="delete">Delete</button>
+  <button type="submit" class="btn btn-danger" id="delete">Delete Animal</button>
 </form>
