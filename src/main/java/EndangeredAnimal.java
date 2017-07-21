@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 
 public class EndangeredAnimal {
   private String name;
@@ -8,6 +9,7 @@ public class EndangeredAnimal {
   private boolean endangered;
   private String health;
   private String age;
+  private Timestamp time;
 
   public EndangeredAnimal(String name, String health, String age) {
     this.name = name;
@@ -32,6 +34,10 @@ public class EndangeredAnimal {
     return id;
   }
 
+  public Timestamp getTime() {
+    return time;
+  }
+
   @Override
   public boolean equals(Object otherEndangeredAnimal) {
     if(!(otherEndangeredAnimal instanceof EndangeredAnimal)) {
@@ -44,7 +50,7 @@ public class EndangeredAnimal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO endangered_animals (name, health, age) VALUES (:name, :health, :age);";
+      String sql = "INSERT INTO endangered_animals (name, health, age, time) VALUES (:name, :health, :age, now());";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("health", this.health)
