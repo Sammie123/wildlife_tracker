@@ -115,8 +115,8 @@ public class App {
 
     post("/animal/:id/delete", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Animal.find(Integer.parseInt(request.params(":id")));
-      animal.delete()
+      Animal animal = Animal.find(Integer.parseInt(request.params(":id")));
+      animal.delete();
       model.put("template", "templates/success_update.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
