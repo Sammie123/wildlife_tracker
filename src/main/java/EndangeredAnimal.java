@@ -54,6 +54,15 @@ public class EndangeredAnimal {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM endangered_animals WHERE id=:id";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
   public static List<EndangeredAnimal> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM endangered_animals;";
