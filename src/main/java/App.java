@@ -129,6 +129,18 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/endangered_animal/:id/update", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      EndangeredAnimal endangeredAnimal = EndangeredAnimal.find(Integer.parseInt(request.params(":id")));
+      String health = request.queryParams("health");
+      String age = request.queryParams("age");
+      endangeredAnimal.updateAge(age);
+      endangeredAnimal.updateHealth(health);
+      model.put("template", "templates/success_update.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
 
   }
 }

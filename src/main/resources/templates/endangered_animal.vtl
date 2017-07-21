@@ -3,22 +3,55 @@
 <h1>$endangeredAnimal.getName()</h1>
 <h3>ID: $endangeredAnimal.getId()</h3>
 
-#if($endangeredAnimal.getSightings().size() == 0)
-  <p>To report a sighting, please visit the <a href="/">home page</a>.</p>
-#else
-  #foreach($sighting in $endangeredAnimal.getSightings())
-    Location: <strong>$sighting.getLocation()</strong>
-    <br>
-    Health: $endangeredAnimal.getHealth()
-    <br>
-    Age: $endangeredAnimal.getAge()
-    <br>
-    Reported by: $sighting.getRangerName()
-    <br>
-    ID: $sighting.getId()
-  #end
-#end
+<form action="/endangered_animal/$endangeredAnimal.getId()/update" method="post">
+  #if($endangeredAnimal.getSightings().size() == 0)
+    <p>To report a sighting, please visit the <a href="/">home page</a>.</p>
+  #else
+    #foreach($sighting in $endangeredAnimal.getSightings())
+      <ul>
+        Location: <strong>$sighting.getLocation()</strong>
+        <br>
+        Health: $endangeredAnimal.getHealth()
+        <br>
+        Age: $endangeredAnimal.getAge()
+        <br>
+        Reported by: $sighting.getRangerName()
+        <br>
+        ID: $sighting.getId()
+        <label>Health</label>
+        <select name="health">
+          <option>Ill</option>
+          <option>Okay</option>
+          <option>Healthy</option>
+        </select>
 
-<form action="/endangered_animal/$endergeredAnimal.getId()/delete" method="post">
+        <label>Age</label>
+        <select name="age">
+          <option>Newborn</option>
+          <option>Young</option>
+          <option>Adult</option>
+        </select>
+        
+        <button type="submit" class="btn btn-danger">Update Information</button>
+      </ul>
+    #end
+  #end
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="/endangered_animal/$endangeredAnimal.getId()/delete" method="post">
   <button type="submit" class="btn btn-danger" id="delete">Delete</button>
 </form>
