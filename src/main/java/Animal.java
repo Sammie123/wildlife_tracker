@@ -3,15 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 
-public class Animal {
+public abstract class Animal {
   private String name;
   private int id;
   private Timestamp time;
 
-  public Animal(String name) {
-    this.name = name;
-    this.id = id;
-  }
+  // public Animal(String name) {
+  //   this.name = name;
+  //   this.id = id;
+  // }
 
   public String getName() {
     return name;

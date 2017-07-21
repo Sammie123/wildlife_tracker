@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 
-public class EndangeredAnimal {
-  private String name;
+public class EndangeredAnimal extends Animal {
+  // private String name;
   private int id;
   private boolean endangered;
   private String health;
