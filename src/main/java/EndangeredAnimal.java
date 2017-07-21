@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndangeredAnimal {
-  public String name;
-  public int id;
-  public boolean endangered;
+  private String name;
+  private int id;
+  private boolean endangered;
   private String health;
   private String age;
 
