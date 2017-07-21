@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Animal {
-  public String name;
-  public int id;
+  private String name;
+  private int id;
 
   public Animal(String name) {
     this.name = name;
@@ -25,7 +25,7 @@ public class Animal {
       return false;
     } else {
       Animal newAnimal = (Animal) otherAnimal;
-      return this.getName().equals(newAnimal.getName());
+      return this.getName().equals(newAnimal.getName()) && this.getId() == newAnimal.getId();
     }
   }
 
@@ -42,8 +42,7 @@ public class Animal {
   public static List<Animal> all() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM animals;";
-      return con.createQuery(sql)
-        .executeAndFetch(Animal.class);
+      return con.createQuery(sql).executeAndFetch(Animal.class);
     }
   }
 
