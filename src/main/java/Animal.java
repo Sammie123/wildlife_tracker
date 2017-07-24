@@ -2,11 +2,13 @@ import org.sql2o.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class Animal {
-  private String name;
-  private int id;
-  private Timestamp time;
+  public String name;
+  public int id;
+  public Timestamp time;
 
   // public Animal(String name) {
   //   this.name = name;
@@ -24,7 +26,6 @@ public abstract class Animal {
   public Timestamp getTime() {
     return time;
   }
-
 
   @Override
   public boolean equals(Object otherAnimal) {
@@ -46,22 +47,22 @@ public abstract class Animal {
     }
   }
 
-  public static List<Animal> all() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals;";
-      return con.createQuery(sql).executeAndFetch(Animal.class);
-    }
-  }
-
-  public static Animal find(int id) {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals WHERE id=:id;";
-      Animal animal = con.createQuery(sql)
-        .addParameter("id", id)
-        .executeAndFetchFirst(Animal.class);
-      return animal;
-    }
-  }
+  // public static List<Animal> all() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM animals;";
+  //     return con.createQuery(sql).executeAndFetch(Animal.class);
+  //   }
+  // }
+  //
+  // public static Animal find(int id) {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT * FROM animals WHERE id=:id;";
+  //     Animal animal = con.createQuery(sql)
+  //       .addParameter("id", id)
+  //       .executeAndFetchFirst(Animal.class);
+  //     return animal;
+  //   }
+  // }
 
   public void updateName(String name) {
     try(Connection con = DB.sql2o.open()) {
@@ -91,5 +92,4 @@ public abstract class Animal {
       return sightings;
     }
   }
-
 }

@@ -1,78 +1,78 @@
-import org.junit.*;
-import static org.junit.Assert.*;
-import org.sql2o.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-
-public class AnimalTest {
-  @Rule
-  public DatabaseRule database = new DatabaseRule();
-
-  @Test
-  public void animal_instantiatesCorrectly_false() {
-    Animal testAnimal = new Animal("Deer");
-    assertEquals(true, testAnimal instanceof Animal);
-  }
-
-  @Test
-  public void getName_animalInstantiatesWithName_Deer() {
-    Animal testAnimal = new Animal("Deer");
-    assertEquals("Deer", testAnimal.getName());
-  }
-
-  @Test
-  public void equals_returnsTrueIfNameIsTheSame_false() {
-    Animal firstAnimal = new Animal("Deer");
-    Animal anotherAnimal = new Animal("Deer");
-    assertTrue(firstAnimal.equals(anotherAnimal));
-  }
-
-  @Test
-  public void save_assignsIdToObjectAndSavesObjectToDatabase() {
-    Animal testAnimal = new Animal("Deer");
-    testAnimal.save();
-    Animal savedAnimal = Animal.all().get(0);
-    assertEquals(testAnimal.getId(), savedAnimal.getId());
-  }
-
-  @Test
-  public void all_returnsAllInstancesOfAnimal_false() {
-    Animal firstAnimal = new Animal("Deer");
-    firstAnimal.save();
-    Animal secondAnimal = new Animal("Black Bear");
-    secondAnimal.save();
-    assertEquals(true, Animal.all().get(0).equals(firstAnimal));
-    assertEquals(true, Animal.all().get(1).equals(secondAnimal));
-  }
-
-  @Test
-  public void find_returnsAnimalWithSameId_secondAnimal() {
-    Animal firstAnimal = new Animal("Deer");
-    firstAnimal.save();
-    Animal secondAnimal = new Animal("Black Bear");
-    secondAnimal.save();
-    assertEquals(Animal.find(secondAnimal.getId()), secondAnimal);
-  }
-
-  @Test
-  public void delete_deletesAnimalFromDatabase_0() {
-    Animal testAnimal = new Animal("Deer");
-    testAnimal.save();
-    testAnimal.delete();
-    assertEquals(0, Animal.all().size());
-  }
-
-  public void updateName_updatesAnimalNameInDatabase_String() {
-    Animal testAnimal = new Animal("Deer");
-    testAnimal.save();
-    testAnimal.updateName("Buck");
-    assertEquals("Buck", testAnimal.getName());
-  }
-
-  @Test
-  public void find_returnsNullWhenNoAnimalFound_null() {
-    assertTrue(Animal.find(999) == null);
-  }
-
-}
+// import org.junit.*;
+// import static org.junit.Assert.*;
+// import org.sql2o.*;
+// import java.util.ArrayList;
+// import java.util.List;
+// import java.util.Arrays;
+//
+// public class EndangeredAnimalTest {
+//   @Rule
+//   public DatabaseRule database = new DatabaseRule();
+//
+//   @Test
+//   public void EndangeredAnimal_instantiatesCorrectly_false() {
+//     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     assertEquals(true, testEndangeredAnimal instanceof EndangeredAnimal);
+//   }
+//
+//   @Test
+//   public void getName_EndangeredAnimalInstantiatesWithName_Deer() {
+//     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     assertEquals("Deer", testEndangeredAnimal.getName());
+//   }
+//
+//   @Test
+//   public void equals_returnsTrueIfNameIsTheSame_false() {
+//     EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     EndangeredAnimal anotherEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     assertTrue(firstEndangeredAnimal.equals(anotherEndangeredAnimal));
+//   }
+//
+//   @Test
+//   public void save_assignsIdToObjectAndSavesObjectToDatabase() {
+//     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     testEndangeredAnimal.save();
+//     EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
+//     assertEquals(testEndangeredAnimal.getId(), savedEndangeredAnimal.getId());
+//   }
+//
+//   @Test
+//   public void all_returnsAllInstancesOfEndangeredAnimal_false() {
+//     EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     firstEndangeredAnimal.save();
+//     EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Black Bear","","");
+//     secondEndangeredAnimal.save();
+//     assertEquals(true, EndangeredAnimal.all().get(0).equals(firstEndangeredAnimal));
+//     assertEquals(true, EndangeredAnimal.all().get(1).equals(secondEndangeredAnimal));
+//   }
+//
+//   @Test
+//   public void find_returnsEndangeredAnimalWithSameId_secondEndangeredAnimal() {
+//     EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     firstEndangeredAnimal.save();
+//     EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Black Bear","","");
+//     secondEndangeredAnimal.save();
+//     assertEquals(EndangeredAnimal.find(secondEndangeredAnimal.getId()), secondEndangeredAnimal);
+//   }
+//
+//   @Test
+//   public void delete_deletesEndangeredAnimalFromDatabase_0() {
+//     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     testEndangeredAnimal.save();
+//     testEndangeredAnimal.delete();
+//     assertEquals(0, EndangeredAnimal.all().size());
+//   }
+//
+//   public void updateName_updatesEndangeredAnimalNameInDatabase_String() {
+//     EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
+//     testEndangeredAnimal.save();
+//     testEndangeredAnimal.updateName("Buck","","");
+//     assertEquals("Buck", testEndangeredAnimal.getName());
+//   }
+//
+//   @Test
+//   public void find_returnsNullWhenNoEndangeredAnimalFound_null() {
+//     assertTrue(EndangeredAnimal.find(999) == null);
+//   }
+//
+// }
