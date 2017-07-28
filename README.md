@@ -8,7 +8,7 @@ The Forest Service is considering a proposal from a timber company to clearcut a
 
 ### Added features/re-written/refactored
 
-I added update/delete methods for EndangeredAnimal.java and Sighting.java. Rework the routing for the update/delete function for endangered animal and non-endangered animals. Add Timestamp for each class and abstract class(Animal.java).
+I added update/delete methods for EndangeredAnimal.java and rework the routing for the update/delete function for endangered animal and non-endangered animals. Add Timestamp for each class and abstract class(cell.java).
 
 ### Setup
 
@@ -18,7 +18,7 @@ To create the necessary databases, launch postgres, then psql, and run the follo
 * `CREATE DATABASE wildlife_tracker;`
 * `\c wildlife_tracker;`
 * `CREATE TABLE animals (id serial PRIMARY KEY, name varchar, time timestamp);`
-* `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar, time timestamp);`
+* `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar, time timestamp, endangered_animal_id int);`
 * `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar, time timestamp);`
 * `CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;`
 * `To access Database, type "psql wildlife_tracker < media.sql" into terminal;`

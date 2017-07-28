@@ -29,25 +29,6 @@ public class EndangeredAnimalTest {
     assertTrue(firstEndangeredAnimal.equals(anotherEndangeredAnimal));
   }
 
-  // @Test
-  // public void save_assignsIdToObjectAndSavesObjectToDatabase() {
-  //   EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
-  //   testEndangeredAnimal.save();
-  //   EndangeredAnimal savedEndangeredAnimal = EndangeredAnimal.all().get(0);
-  //   assertEquals(testEndangeredAnimal.getId(), savedEndangeredAnimal.getId());
-  // }
-  //
-  // @Test
-  // public void all_returnsAllInstancesOfEndangeredAnimal_false() {
-  //   EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Deer","","");
-  //   firstEndangeredAnimal.save();
-  //   EndangeredAnimal secondEndangeredAnimal = new EndangeredAnimal("Black Bear","","");
-  //   secondEndangeredAnimal.save();
-  //   throw new IndexOutOfBoundsException("This is to catch an error");
-  //   // assertEquals(true, EndangeredAnimal.all().get(0).equals(firstEndangeredAnimal));
-  //   // assertEquals(true, EndangeredAnimal.all().get(1).equals(secondEndangeredAnimal));
-  // }
-
   @Test
   public void find_returnsEndangeredAnimalWithSameId_secondEndangeredAnimal() {
     EndangeredAnimal firstEndangeredAnimal = new EndangeredAnimal("Deer","","");
@@ -64,13 +45,6 @@ public class EndangeredAnimalTest {
     testEndangeredAnimal.delete();
     assertEquals(0, EndangeredAnimal.all().size());
   }
-
-  // public void updateName_updatesEndangeredAnimalNameInDatabase_String() {
-  //   EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Deer","","");
-  //   testEndangeredAnimal.save();
-  //   testEndangeredAnimal.updateName("Buck","","");
-  //   assertEquals("Buck", testEndangeredAnimal.getName());
-  // }
 
   @Test
   public void find_returnsNullWhenNoEndangeredAnimalFound_null() {

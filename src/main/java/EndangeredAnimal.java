@@ -5,13 +5,11 @@ import java.sql.Timestamp;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class EndangeredAnimal extends Animal {
-  // private String name;
-  private int id;
+public class EndangeredAnimal extends Cell{
   private boolean endangered;
   private String health;
   private String age;
-  // private Timestamp time;
+  private Timestamp time;
   public static final String ANIMAL_LOCATION = "forest";
 
   public EndangeredAnimal(String name, String health, String age) {
@@ -73,7 +71,7 @@ public class EndangeredAnimal extends Animal {
   }
 
   public static List<EndangeredAnimal> all() {
-    String sql = "SELECT * FROM animals;";
+    String sql = "SELECT * FROM endangered_animals;";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(EndangeredAnimal.class);
     }
@@ -81,7 +79,7 @@ public class EndangeredAnimal extends Animal {
 
   public static EndangeredAnimal find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM animals WHERE id=:id;";
+      String sql = "SELECT * FROM endangered_animals WHERE id=:id;";
       EndangeredAnimal endangeredAnimal = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(EndangeredAnimal.class);

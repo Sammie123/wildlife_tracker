@@ -10,6 +10,7 @@ public class Sighting {
   private String ranger_name;
   private int id;
   private Timestamp time;
+  private int endangered_animal_id;
 
   public Sighting(int animal_id, String location, String ranger_name) {
     this.animal_id = animal_id;
@@ -38,6 +39,10 @@ public class Sighting {
     return time;
   }
 
+  public int getEndangered_animal_id() {
+    return endangered_animal_id;
+  }
+
   @Override
   public boolean equals(Object otherSighting) {
     if(!(otherSighting instanceof Sighting)) {
@@ -55,6 +60,19 @@ public class Sighting {
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
         .addParameter("ranger_name", this.ranger_name)
+        .throwOnMappingFailure(false)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
+  public void saveEndangered() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO sightings (location, ranger_name, time, endangered_animal_id) VALUES (:location, :ranger_name, now()), :endangered_animal_id;";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("location", this.location)
+        .addParameter("ranger_name", this.ranger_name)
+        .addParameter("endangered_animal_id", this.animal_id)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
@@ -81,14 +99,4 @@ public class Sighting {
       return null;
     }
   }
-
-  public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM sightings WHERE animal_id=:id";
-      con.createQuery(sql)
-        .addParameter("animal_id", id)
-        .executeUpdate();
-    }
-  }
-
 }

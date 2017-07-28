@@ -40,8 +40,7 @@ SET default_with_oids = false;
 
 CREATE TABLE animals (
     id integer NOT NULL,
-    name character varying,
-    "time" timestamp without time zone
+    name character varying
 );
 
 
@@ -113,7 +112,8 @@ CREATE TABLE sightings (
     animal_id integer,
     location character varying,
     ranger_name character varying,
-    "time" timestamp without time zone
+    "time" timestamp without time zone,
+    endangered_animal_id integer
 );
 
 
@@ -165,10 +165,7 @@ ALTER TABLE ONLY sightings ALTER COLUMN id SET DEFAULT nextval('sightings_id_seq
 -- Data for Name: animals; Type: TABLE DATA; Schema: public; Owner: LMNH
 --
 
-COPY animals (id, name, "time") FROM stdin;
-21	Hello	\N
-22	Bear	\N
-23	Eagle	2017-07-21 16:11:14.760092
+COPY animals (id, name) FROM stdin;
 \.
 
 
@@ -176,7 +173,7 @@ COPY animals (id, name, "time") FROM stdin;
 -- Name: animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('animals_id_seq', 23, true);
+SELECT pg_catalog.setval('animals_id_seq', 10, true);
 
 
 --
@@ -184,9 +181,6 @@ SELECT pg_catalog.setval('animals_id_seq', 23, true);
 --
 
 COPY endangered_animals (id, name, health, age, "time") FROM stdin;
-15	elephant	Ill	Newborn	\N
-16	eagle	Ill	Newborn	2017-07-21 16:05:03.629094
-17	dinosaur	Ill	Newborn	2017-07-21 16:05:29.738045
 \.
 
 
@@ -194,37 +188,14 @@ COPY endangered_animals (id, name, health, age, "time") FROM stdin;
 -- Name: endangered_animals_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('endangered_animals_id_seq', 17, true);
+SELECT pg_catalog.setval('endangered_animals_id_seq', 12, true);
 
 
 --
 -- Data for Name: sightings; Type: TABLE DATA; Schema: public; Owner: LMNH
 --
 
-COPY sightings (id, animal_id, location, ranger_name, "time") FROM stdin;
-1	1	River	Lincoln	\N
-2	1	Forest	Sam	\N
-3	2	Nowhere	John	\N
-4	2	IDK	John	\N
-5	3			\N
-6	1	NearRiver	Molly	\N
-7	16	Near River	Lincoln	\N
-8	2	Myhouse	Yo	\N
-9	2	hhh	hhhhh	\N
-10	5	River	Lincoln	\N
-15	11	Wood	Jen	\N
-16	11	House	Lincoln	\N
-17	12	s	s	\N
-18	12	wwww	wwww	\N
-19	13	er	er	\N
-20	13	as	as	\N
-21	14	river 2	yo	\N
-22	14	Woods	yoma	\N
-23	15	savana	africa	\N
-24	22	River	River	\N
-25	22	Woods	Woods	\N
-26	16	mountain	Lincoln	\N
-27	23	eagle 	eagle	2017-07-21 16:11:50.535442
+COPY sightings (id, animal_id, location, ranger_name, "time", endangered_animal_id) FROM stdin;
 \.
 
 
@@ -232,7 +203,7 @@ COPY sightings (id, animal_id, location, ranger_name, "time") FROM stdin;
 -- Name: sightings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: LMNH
 --
 
-SELECT pg_catalog.setval('sightings_id_seq', 27, true);
+SELECT pg_catalog.setval('sightings_id_seq', 14, true);
 
 
 --

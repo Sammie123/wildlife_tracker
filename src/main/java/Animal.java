@@ -5,15 +5,12 @@ import java.sql.Timestamp;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class Animal {
-  public String name;
-  public int id;
-  public Timestamp time;
+public class Animal extends Cell {
 
-  // public Animal(String name) {
-  //   this.name = name;
-  //   this.id = id;
-  // }
+  public Animal(String name) {
+    this.name = name;
+    this.id = id;
+  }
 
   public String getName() {
     return name;
@@ -21,10 +18,6 @@ public abstract class Animal {
 
   public int getId() {
     return id;
-  }
-
-  public Timestamp getTime() {
-    return time;
   }
 
   @Override
@@ -39,7 +32,7 @@ public abstract class Animal {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO animals (name, time) VALUES (:name, now());";
+      String sql = "INSERT INTO animals (name) VALUES (:name)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .executeUpdate()
@@ -47,22 +40,22 @@ public abstract class Animal {
     }
   }
 
-  // public static List<Animal> all() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM animals;";
-  //     return con.createQuery(sql).executeAndFetch(Animal.class);
-  //   }
-  // }
-  //
-  // public static Animal find(int id) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM animals WHERE id=:id;";
-  //     Animal animal = con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeAndFetchFirst(Animal.class);
-  //     return animal;
-  //   }
-  // }
+  public static List<Animal> all() {
+    String sql = "SELECT * FROM animals;";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Animal.class);
+    }
+  }
+
+  public static Animal find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM animals WHERE id=:id;";
+      Animal animal = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Animal.class);
+      return animal;
+    }
+  }
 
   public void updateName(String name) {
     try(Connection con = DB.sql2o.open()) {
@@ -79,6 +72,13 @@ public abstract class Animal {
       String sql = "DELETE FROM animals WHERE id=:id;";
       con.createQuery(sql)
         .addParameter("id", id)
+        .executeUpdate();
+    }
+
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM sightings WHERE animal_id=:id;";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
         .executeUpdate();
     }
   }
