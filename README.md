@@ -17,9 +17,9 @@ To create the necessary databases, launch postgres, then psql, and run the follo
 * `Git clone this respository onto your local computer;`
 * `CREATE DATABASE wildlife_tracker;`
 * `\c wildlife_tracker;`
-* `CREATE TABLE animals (id serial PRIMARY KEY, name varchar, time timestamp);`
-* `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar, time timestamp, endangered_animal_id int);`
-* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar, time timestamp);`
+* `CREATE TABLE animals (id serial PRIMARY KEY, name varchar);`
+* `CREATE TABLE endangered_animals (id serial PRIMARY KEY, name varchar, health varchar, age varchar, time timestamp);`
+* `CREATE TABLE sightings (id serial PRIMARY KEY, animal_id int, location varchar, ranger_name varchar, time timestamp, endangered_animal_id int);`
 * `CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;`
 * `To access Database, type "psql wildlife_tracker < media.sql" into terminal;`
 * `To access the web application, type 'gradle run' into terminal then input localhost:4567 in a web browser;`
